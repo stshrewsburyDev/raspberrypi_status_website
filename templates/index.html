@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>RPI status</title>
+        <link rel="icon" href="{{url_for('static', filename='images/icon.png')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='style/index.css')}}">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="content">
+            <h1 class="title"><img class="icon" src="{{url_for('static', filename='images/icon.png')}}" alt="RPI logo"><u>RPI server:</u></h1>
+            <br>
+            <!-- CPU -->
+            <div class="infobox" style="background-color: #C45656;color: #FFFFFF;">
+                <img src="{{url_for('static', filename='images/icons/cpu.png')}}" alt="CPU icon">
+                <p>{{static_info['cpu_brand']}}<br>{{make_pb(stats.CPU['percent'])}} {{stats.CPU['percent']}}%<br><b>Temp:</b> {% if stats.CPU['temp'] %}{{stats.CPU['temp']}} °C{% else %}Unknown{% endif %}</p>
+            </div>
+            <!-- RAM/SWAP -->
+            <div class="infobox" style="background-color: #8D4CB9;color: #FFFFFF;">
+                <img src="{{url_for('static', filename='images/icons/ram.png')}}" alt="RAM icon">
+                <p><b>RAM:</b> {{round(stats.RAM['used'] / 1024 / 1024)}} / {{round(stats.RAM['total'] / 1024 / 1024)}} MB<br>{{make_pb(stats.RAM['percent'])}} {{stats.RAM['percent']}}%<br><b>SWAP:</b> {{round(stats.SWAP['used'] / 1024 / 1024)}} / {{round(stats.SWAP['total'] / 1024 / 1024)}} MB<br>{{make_pb(stats.SWAP['percent'])}} {{stats.SWAP['percent']}}%</p>
+            </div>
+            <!-- DISK -->
+            <div class="infobox" style="background-color: #BF52A4;color: #FFFFFF;">
+                <img src="{{url_for('static', filename='images/icons/disk.png')}}" alt="Disk icon">
+                <p>{{round(stats.DISK['used'] / 1024 / 1024)}} / {{round(stats.DISK['total'] / 1024 / 1024)}} MB ({{round(stats.DISK['used'] / 1024 / 1024 / 1024)}} / {{round(stats.DISK['total'] / 1024 / 1024 / 1024)}} GB)<br>{{make_pb(stats.DISK['percent'])}} {{stats.DISK['percent']}}%</p>
+            </div>
+            <!-- Time (uptime, startup & current) -->
+            <div class="infobox" style="background-color: #539934;color: #FFFFFF;">
+                <img src="{{url_for('static', filename='images/icons/clock.png')}}" alt="Clock icon">
+                <p><b>Current:</b> {{time.strftime('%a %d %B %Y %I:%M:%S %p')}}<br><b>Startup:</b> {{static_info['startup'].strftime('%a %d %B %Y %I:%M:%S %p')}}<br><b>Uptime:</b> {{time-static_info['startup']}}</p>
+            </div>
+            <!-- OS -->
+            <div class="infobox" style="background-color: #567CC4;color: #FFFFFF;">
+                <img src="{{url_for('static', filename='images/icons/server.png')}}" alt="Server icon">
+                <p>{{static_info['os_ver']}}</p>
+            </div>
+            <!-- Python ver -->
+            <div class="infobox" style="background-color: #C4BA50;color: #FFFFFF;">
+                <img src="{{url_for('static', filename='images/icons/python.png')}}" alt="Python icon">
+                <p>{{static_info['py_ver']}}</p>
+            </div>
+            <!-- Library info -->
+            <div class="infobox" style="background-color: #656565;color: #FFFFFF;">
+                <img src="{{url_for('static', filename='images/icons/library.png')}}" alt="Flask icon">
+                <p>
+                    {% for library in stats.libraries %}
+                        {{library['lib']}} - {{library['ver']}} {% if library['pypi'] %}(Latest version: {{library['pypi']}}){% endif %}<br>
+                    {% endfor %}
+                </p>
+            </div>
+            <p class="last_updated">Info last updated: {{stats.last_update.strftime('%I:%M:%S %p')}} - ({{round((time-stats.last_update).total_seconds())}}) seconds ago</p>
+        </div>
+    </body>
+</html>

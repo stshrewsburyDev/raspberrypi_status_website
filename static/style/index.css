@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+html{
+    scroll-behavior: smooth;
+    font-family: 'Roboto';
+    background-color: #424242;
+}
+
+.content{
+    margin: auto;
+    max-width: 1000px;
+    width: 100%;
+    text-align: center;
+    background-color: #5E5E5E;
+    color: #DDDDDD;
+    border-radius: 25px;
+}
+
+.content .icon{
+    height: 50px;
+    vertical-align: middle;
+}
+
+.content .title{
+    font-size: 42px;
+    line-height: 60px;
+    display: inline;
+    vertical-align: middle;
+
+}
+
+.content .infobox{
+    width: 100%;
+    min-height: 140px;
+    font-size: 22px;
+    word-wrap: break-word;
+    text-align: left;
+}
+
+.content .infobox img{
+    position: absolute;
+    height: 120px;
+    margin: 10px;
+}
+
+.content .infobox p{
+    padding: 10px 10px 10px 150px;
+    margin: 0;
+}
+
+.last_updated{
+    margin: 0;
+    padding: 10px;
+}

@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>RPI status | {{CODE}}</title>
+        <link rel="icon" href="{{url_for('static', filename='images/icon.png')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='style/error.css')}}">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="content">
+            <h1><u>Error {{CODE}}:</u></h1>
+            <h2>{{CODE_MSG}}</h2>
+            <p><a href="{{url_for('index')}}">Back to homepage</a></p>
+            <img src="https://http.cat/{{CODE}}" alt="Error {{CODE}}">
+        </div>
+    </body>
+</html>
