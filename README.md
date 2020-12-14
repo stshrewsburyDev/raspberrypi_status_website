@@ -26,7 +26,7 @@ pip3 install -r requirements.txt
 **Warning:** Sometimes installing matplotlib via pip can freeze your rpi.
 To solve this remove it from the requirements and install via:
 ```
-sudo apt-get install python-matplotlib
+sudo apt-get install python3-matplotlib
 ```
 
 Setup:
